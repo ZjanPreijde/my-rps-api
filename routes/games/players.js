@@ -26,7 +26,7 @@ const getPlayers = (req, res, next) => {
 
         return {
           userId: player.userId,
-          pairs: player.pairs,
+          symbol: player.symbol,
           name
         }
       })
@@ -54,7 +54,8 @@ module.exports = io => {
       }
 
       // Add the user to the players
-      req.game.players.push({ userId, pairs: [] })
+      // req.game.players.push({ userId, pairs: [] })
+      req.game.players = [ ...req.game.players, { userId } ]
 
       req.game.save()
         .then((game) => {
